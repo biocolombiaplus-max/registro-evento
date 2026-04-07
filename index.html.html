@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confirmación de Asistencia — Encuentro Especial</title><!-- v2 -->
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sky: #e8f4fd;
+    --sky-mid: #b8d9f5;
+    --blue-main: #1a6fb5;
+    --blue-dark: #0d4a80;
+    --blue-light: #d0e8f8;
+    --gold: #e8a800;
+    --gold-light: #fff3c0;
+    --white: #ffffff;
+    --text-dark: #1a2a3a;
+    --text-mid: #3a5a7a;
+    --text-light: #6a8aaa;
+    --success: #1a8a4a;
+    --success-bg: #e8f5ed;
+    --red: #c0392b;
+    --radius: 18px;
+    --radius-sm: 10px;
+    --shadow: 0 8px 40px rgba(26,111,181,0.13);
+    --shadow-card: 0 4px 24px rgba(26,111,181,0.10);
+  }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(160deg, #cfe8fa 0%, #e8f4fd 40%, #f0f8ff 70%, #d8eefa 100%);
+    min-height: 100vh;
+    padding: 24px 16px 48px;
+    color: var(--text-dark);
+  }
+
+  .stars {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 4px;
+    letter-spacing: 6px;
+  }
+
+  .container {
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  .header-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 32px 32px 28px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    margin-bottom: 18px;
+    border-top: 5px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-card::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: var(--gold-light);
+    opacity: 0.5;
+  }
+
+  .badge-org {
+    display: inline-block;
+    background: var(--blue-light);
+    color: var(--blue-main);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  .header-card h1 {
+    font-family: 'Lora', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--blue-dark);
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+
+  .header-card p {
+    color: var(--text-mid);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .event-details {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 20px 28px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow-card);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .detail-item {
+    padding: 12px 8px;
+    background: var(--sky);
+    border-radius: var(--radius-sm);
+  }
+
+  .detail-icon {
+    font-size: 22px;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .detail-label {
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .detail-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--blue-dark);
+    line-height: 1.3;
+  }
+
+  .form-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 32px 32px;
+    box-shadow: var(--shadow);
+  }
+
+  .form-card h2 {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--blue-dark);
+    margin-bottom: 6px;
+  }
+
+  .form-card .subtitle {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 24px;
+  }
+
+  .field-group {
+    margin-bottom: 18px;
+  }
+
+  .field-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-mid);
+    margin-bottom: 7px;
+    letter-spacing: 0.3px;
+  }
+
+  .field-group label span.req {
+    color: var(--red);
+    margin-left: 2px;
+  }
+
+  .field-group input {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1.5px solid var(--sky-mid);
+    border-radius: var(--radius-sm);
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    color: var(--text-dark);
+    background: var(--sky);
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+
+  .field-group input:focus {
+    border-color: var(--blue-main);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(26,111,181,0.10);
+  }
+
+  .field-group input.error {
+    border-color: var(--red);
+    background: #fff5f5;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .error-msg {
+    font-size: 12px;
+    color: var(--red);
+    margin-top: 5px;
+    display: none;
+    font-weight: 600;
+  }
+
+  .error-msg.visible { display: block; }
+
+  .divider {
+    border: none;
+    border-top: 1.5px solid var(--sky);
+    margin: 22px 0;
+  }
+
+  .btn-submit {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--blue-main) 0%, var(--blue-dark) 100%);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .btn-submit:hover { opacity: 0.92; transform: translateY(-1px); }
+  .btn-submit:active { transform: translateY(0); opacity: 1; }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  .spinner {
+    width: 18px; height: 18px;
+    border: 2.5px solid rgba(255,255,255,0.4);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: none;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .privacy-note {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 14px;
+    line-height: 1.5;
+  }
+
+  /* Success screen */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 20px 0 10px;
+  }
+
+  .success-icon {
+    width: 72px; height: 72px;
+    background: var(--success-bg);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 32px;
+  }
+
+  .success-screen h2 {
+    font-family: 'Lora', serif;
+    font-size: 22px;
+    color: var(--success);
+    margin-bottom: 10px;
+  }
+
+  .success-screen p {
+    font-size: 15px;
+    color: var(--text-mid);
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+
+  .success-remind {
+    background: var(--blue-light);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--blue-dark);
+    font-weight: 600;
+    text-align: left;
+  }
+
+  .footer-logo {
+    text-align: center;
+    margin-top: 28px;
+    font-size: 12px;
+    color: var(--text-light);
+  }
+
+  .hashtag {
+    font-weight: 800;
+    color: var(--blue-main);
+  }
+
+  @media (max-width: 480px) {
+    .header-card, .form-card { padding: 24px 20px; }
+    .event-details { grid-template-columns: 1fr; }
+    .field-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="stars">⭐ ⭐ ⭐</div>
+
+  <div class="header-card">
+    <div class="badge-org">#yosoyesecentro</div>
+    <h1>¡Invitación Especial!</h1>
+    <p>Queridos compañeros, los invitamos a compartir un momento especial lleno de compañerismo y buena energía 🤝💙</p>
+  </div>
+
+  <div class="event-details">
+    <div class="detail-item">
+      <span class="detail-icon">📅</span>
+      <span class="detail-label">Fecha</span>
+      <span class="detail-value">Sábado<br>11 de abril</span>
+    </div>
+    <div class="detail-item">
+      <span class="detail-icon">🕘</span>
+      <span class="detail-label">Hora</span>
+      <span class="detail-value">9:00 a.m.</span>
+    </div>
+    <div class="detail-item">
+      <span class="detail-icon">📍</span>
+      <span class="detail-label">Lugar</span>
+      <span class="detail-value">Cornejo<br>Charco Azul</span>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <div id="formSection">
+      <h2>Confirma tu asistencia</h2>
+      <p class="subtitle">Completa tus datos para reservar tu lugar. ¡Te esperamos con mucho gusto!</p>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label for="nombre">Nombre <span class="req">*</span></label>
+          <input type="text" id="nombre" placeholder="Tu nombre" autocomplete="given-name">
+          <div class="error-msg" id="err-nombre">Por favor ingresa tu nombre.</div>
+        </div>
+        <div class="field-group">
+          <label for="apellido">Apellido <span class="req">*</span></label>
+          <input type="text" id="apellido" placeholder="Tu apellido" autocomplete="family-name">
+          <div class="error-msg" id="err-apellido">Por favor ingresa tu apellido.</div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="nacimiento">Fecha de nacimiento <span class="req">*</span></label>
+        <input type="date" id="nacimiento" max="2007-04-11">
+        <div class="error-msg" id="err-nacimiento">Por favor ingresa una fecha válida.</div>
+      </div>
+
+      <div class="field-group">
+        <label for="telefono">Teléfono / WhatsApp <span class="req">*</span></label>
+        <input type="tel" id="telefono" placeholder="Ej. 3001234567" autocomplete="tel">
+        <div class="error-msg" id="err-telefono">Ingresa un número válido (mínimo 7 dígitos).</div>
+      </div>
+
+      <div class="field-group">
+        <label for="correo">Correo electrónico <span class="req">*</span></label>
+        <input type="email" id="correo" placeholder="tucorreo@ejemplo.com" autocomplete="email">
+        <div class="error-msg" id="err-correo">Ingresa un correo electrónico válido.</div>
+      </div>
+
+      <hr class="divider">
+
+      <button class="btn-submit" id="btnEnviar" onclick="enviarFormulario()">
+        <div class="spinner" id="spinner"></div>
+        <span id="btnText">✓ Confirmar mi asistencia</span>
+      </button>
+      <p class="privacy-note">🔒 Tus datos son confidenciales y solo se usan para confirmar tu asistencia al evento.</p>
+    </div>
+
+    <div class="success-screen" id="successSection">
+      <div class="success-icon">✅</div>
+      <h2>¡Registro exitoso!</h2>
+      <p>Gracias por confirmar tu asistencia. <strong id="nombreConfirmado"></strong>, hemos recibido tus datos correctamente.</p>
+      <p>Revisa tu correo electrónico — te enviamos una confirmación con todos los detalles del evento.</p>
+      <div class="success-remind">
+        📅 <strong>Recuerda:</strong> Sábado 11 de abril · 9:00 a.m.<br>
+        📍 Cornejo Charco Azul<br>
+        🤝 ¡Te esperamos con mucho gusto!
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-logo">
+    <span class="hashtag">#yosoyesecentro</span><br>
+    Encuentro especial de compañerismo y buena energía
+  </div>
+
+</div>
+
+<script>
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx6mdRQFySC-pqeQ9YMwiU_tRYhhcxwJchjVNdU4g_BLi2N0JG9HrukCi2rKp3CZc6C6w/exec';
+
+  function validar() {
+    let ok = true;
+
+    function check(id, errId, cond) {
+      const el = document.getElementById(id);
+      const err = document.getElementById(errId);
+      if (!cond(el.value.trim())) {
+        el.classList.add('error');
+        err.classList.add('visible');
+        ok = false;
+      } else {
+        el.classList.remove('error');
+        err.classList.remove('visible');
+      }
+    }
+
+    check('nombre',    'err-nombre',    v => v.length >= 2);
+    check('apellido',  'err-apellido',  v => v.length >= 2);
+    check('nacimiento','err-nacimiento',v => v.length > 0);
+    check('telefono',  'err-telefono',  v => /^\+?[\d\s\-]{7,15}$/.test(v));
+    check('correo',    'err-correo',    v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+
+    return ok;
+  }
+
+  async function enviarFormulario() {
+    if (!validar()) return;
+
+    const btn = document.getElementById('btnEnviar');
+    const txt = document.getElementById('btnText');
+    const sp  = document.getElementById('spinner');
+
+    btn.disabled = true;
+    sp.style.display = 'block';
+    txt.textContent = 'Enviando...';
+
+    const datos = {
+      nombre:     document.getElementById('nombre').value.trim(),
+      apellido:   document.getElementById('apellido').value.trim(),
+      nacimiento: document.getElementById('nacimiento').value,
+      telefono:   document.getElementById('telefono').value.trim(),
+      correo:     document.getElementById('correo').value.trim()
+    };
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(datos)
+      });
+    } catch (e) {
+      console.error(e);
+    }
+
+    document.getElementById('formSection').style.display = 'none';
+    document.getElementById('successSection').style.display = 'block';
+    document.getElementById('nombreConfirmado').textContent = datos.nombre + ' ' + datos.apellido;
+  }
+
+  document.querySelectorAll('input').forEach(inp => {
+    inp.addEventListener('input', () => {
+      inp.classList.remove('error');
+      const err = document.getElementById('err-' + inp.id);
+      if (err) err.classList.remove('visible');
+    });
+  });
+</script>
+</body>
+</html>
