@@ -20,7 +20,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <script>
-var APP_VER='9.29';
+var APP_VER='9.30';
 // ── Version-check: bypasses Cloudflare CDN cache via unique timestamp URL ──
 // Works even when the SW is unregistered (e.g. users stuck on v8.98).
 // /version.json?_t=TIMESTAMP is always a CDN cache-miss → fetches live file.
@@ -2124,7 +2124,7 @@ function showTab(t){
   document.getElementById("pg-"+t).classList.add("active");
   var ni=document.getElementById("ni-"+t);if(ni)ni.classList.add("active");
   if(t==="panel")rPn();
-  if(t==="fixture")rFx();
+  if(t==="fixture"){window.scrollTo({top:0,behavior:'instant'});rFx();}
   if(t==="tabla"){rCards();rTb();rEqd();rDisc();}
 }
 
@@ -3541,6 +3541,22 @@ function rFx(){
     h+='</div></div>';
   });
   document.getElementById("fc").innerHTML=h||'<div class="es"><div class="esi">&#128197;</div><p>Sin partidos</p></div>';
+  // Auto-scroll to next/today/live match only when fixture tab is active
+  requestAnimationFrame(function(){
+    var fc=document.getElementById('fc');
+    if(!fc)return;
+    var target=fc.querySelector('.live-match')||fc.querySelector('.hoy-match')||fc.querySelector('.next-match');
+    if(!target)return;
+    var pg=document.getElementById('pg-fixture');
+    var pgActive=pg&&(pg.classList.contains('active')||pg.style.display!=='none');
+    if(!pgActive)return;
+    // Scroll the page so the target card is near the top with a small offset for the sticky header
+    var headerH=(document.querySelector('.topbar')||{}).offsetHeight||120;
+    var rect=target.getBoundingClientRect();
+    var scrollTop=window.pageYOffset||document.documentElement.scrollTop;
+    var targetY=rect.top+scrollTop-headerH-16;
+    window.scrollTo({top:targetY,behavior:'smooth'});
+  });
 }
 
 // ── STANDINGS ──
